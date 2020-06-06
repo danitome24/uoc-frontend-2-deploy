@@ -4,7 +4,7 @@ import {FakeBackendService} from './shared/inmemory-db/fake-backend.service';
 import {HttpClientInMemoryWebApiModule} from 'angular-in-memory-web-api';
 import {HttpClientModule} from '@angular/common/http';
 import {NgModule} from '@angular/core';
-import {RouterModule} from '@angular/router';
+import {PreloadAllModules, RouterModule} from '@angular/router';
 import {SharedModule} from './shared/shared.module';
 import {rootRouterConfig} from './app-routing';
 import {StoreModule} from '@ngrx/store';
@@ -15,16 +15,18 @@ import {environment} from '../environments/environment';
 import {EffectsModule} from '@ngrx/effects';
 import {SigninModule} from './auth/signin/signin.module';
 import {metaReducers} from './reducers';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { ServiceWorkerModule } from '@angular/service-worker';
-import { BrowserModule } from '@angular/platform-browser';
+import {NoopAnimationsModule} from '@angular/platform-browser/animations';
+import {ServiceWorkerModule} from '@angular/service-worker';
+import {BrowserModule} from '@angular/platform-browser';
 
 @NgModule({
     imports: [
-        BrowserModule.withServerTransition({ appId: 'serverApp' }),
+        BrowserModule.withServerTransition({appId: 'serverApp'}),
         SharedModule,
         CoreModule,
-        RouterModule.forRoot(rootRouterConfig, { useHash: false, initialNavigation: 'enabled' }),
+        RouterModule.forRoot(rootRouterConfig,
+            {useHash: false, initialNavigation: 'enabled', preloadingStrategy: PreloadAllModules}
+        ),
         HttpClientModule,
         SigninModule,
         HttpClientInMemoryWebApiModule.forRoot(FakeBackendService, {
@@ -44,7 +46,7 @@ import { BrowserModule } from '@angular/platform-browser';
         !environment.production ? StoreDevtoolsModule.instrument() : [],
         StoreRouterConnectingModule.forRoot({stateKey: 'router'}),
         NoopAnimationsModule,
-        ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+        ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production})
     ],
     declarations: [AppComponent],
     providers: [],
