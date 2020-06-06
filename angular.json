@@ -131,7 +131,7 @@
         "server": {
           "builder": "@angular-devkit/build-angular:server",
           "options": {
-            "outputPath": "dist/UOCJob/server",
+            "outputPath": "docs/UOCJob/server",
             "main": "server.ts",
             "tsConfig": "tsconfig.server.json"
           },

@@ -9,7 +9,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "dev:ssr": "ng run UOCJob:serve-ssr",
-    "serve:ssr": "node dist/UOCJob/server/main.js",
+    "serve:ssr": "node docs/UOCJob/server/main.js",
     "build:ssr": "ng build --prod && ng run UOCJob:server:production",
     "prerender": "ng run UOCJob:prerender"
   },
